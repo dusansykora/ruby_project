@@ -25,6 +25,11 @@ class BandsController < ApplicationController
   end
 
   def show
+    @members = ""
+    @band.users.each do |user|
+      @members << ", " if @members.length > 0
+      @members << user.username
+    end
   end
 
   def edit
