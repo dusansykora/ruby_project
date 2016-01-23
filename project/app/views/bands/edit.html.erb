@@ -25,6 +25,11 @@
     <%= f.label :genre %><br>
     <%= f.select :genre, @genre_names, selected: @band.genre.name %>
   </div>
+  <div class="form-group">
+    <%= f.label :cover_photo %>
+    <%= f.file_field :cover_photo %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

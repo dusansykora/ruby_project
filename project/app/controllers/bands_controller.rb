@@ -40,6 +40,12 @@ class BandsController < ApplicationController
   end
 
   def update
+    @band.genre = Genre.find_by_name(params[:band][:genre])
+    if @band.update(band_params)
+      redirect_to @band
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -55,6 +61,6 @@ class BandsController < ApplicationController
   end
 
   def band_params
-    params.require(:band).permit(:name, :establish_year)
+    params.require(:band).permit(:name, :establish_year, :cover_photo)
   end
 end
