@@ -1,6 +1,35 @@
 <h1>Editing Band</h1>
 
-<%= render 'form' %>
+<%= form_for(@band) do |f| %>
+  <% if @band.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@band.errors.count, "error") %> prohibited this band from being saved:</h2>
+
+      <ul>
+      <% @band.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :establish_year %><br>
+    <%= f.number_field :establish_year, min: 1900, max: Time.now.year %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.select :genre, @genre_names, selected: @band.genre.name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Show', @band %> |
 <%= link_to 'Back', bands_path %>
