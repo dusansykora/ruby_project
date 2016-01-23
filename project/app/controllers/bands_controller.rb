@@ -15,7 +15,7 @@ class BandsController < ApplicationController
 
   def create
     @band = Band.new(band_params)
-
+    @band.genre = Genre.find_by_name(params[:band][:genre])
     if @band.save
        current_user.update(:band_id => @band.id)
        redirect_to @band
@@ -25,6 +25,13 @@ class BandsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+    @genre_names = []
+    Genre.all.each do |genre|
+      @genre_names << genre.name
+    end
   end
 
   def update
@@ -43,6 +50,6 @@ class BandsController < ApplicationController
   end
 
   def band_params
-    params.require(:band).permit(:name, :establish_year, :genre)
+    params.require(:band).permit(:name, :establish_year)
   end
 end
