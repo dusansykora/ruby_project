@@ -1,3 +1,5 @@
+<%= image_tag(@band.cover_photo.url(:thumb)) %>
+
 <p>
   <strong>Name:</strong>
   <%= @band.name %>
@@ -10,7 +12,7 @@
 
 <p>
   <strong>Genre:</strong>
-  
+  <%= @band.genre.name %>
 </p>
 
 <%= link_to 'Edit', edit_band_path(@band) %> |

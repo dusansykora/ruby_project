@@ -19,6 +19,10 @@
     <%= f.label :establish_year %><br>
     <%= f.number_field :establish_year, min: 1900, max: Time.now.year %>
   </div>
+  <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.select :genre, @genre_names, include_blank: true, default: nil %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
