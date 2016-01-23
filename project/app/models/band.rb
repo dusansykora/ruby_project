@@ -1,5 +1,5 @@
 class Band < ActiveRecord::Base
-  has_one :genre
+  belongs_to :genre
   has_many :user
   has_attached_file :cover_photo,
     :styles => { :medium => "300x300>", :thumb => "100x100#" },
