@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'application#home', page: 'home'
 
-  resources :bands
-  
+  resources :bands do
+    resources :events
+  end
+
+  #get '/bands/:band_id/events' => 'events#index'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
