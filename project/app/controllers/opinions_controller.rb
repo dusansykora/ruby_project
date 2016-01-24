@@ -1,6 +1,7 @@
 class OpinionsController < ApplicationController
   def index
     @band = Band.find(params[:band_id])
+    @reaction = Reaction.new
   end
   
   def new

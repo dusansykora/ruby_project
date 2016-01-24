@@ -28,8 +28,40 @@
     <% @band.opinions.each do |opinion| %>
       <tr>
         <td><%= opinion.text %></td>
-        <td>LICK</td>
-        <td>DIS-LICK</td>
+        <td>
+          <%= form_for [@band, opinion, @reaction] do |f| %>
+            <div class="field">
+              <%= f.hidden_field :user_id, value: current_user.id %>
+            </div>
+            <div class="field">
+              <%= f.hidden_field :opinion_id, value: opinion.id %>
+            </div>
+            <div class="field">
+              <%= f.hidden_field :positive, value: '1' %>
+            </div>
+            <div class="actions">
+              <%= f.submit 'LICK' %>
+            </div>
+            <%= "(#{opinion.reactions.select{|reaction| reaction.positive}.count})" %>
+          <% end %>
+        </td>
+        <td>
+          <%= form_for [@band, opinion, @reaction] do |f| %>
+            <div class="field">
+              <%= f.hidden_field :user_id, value: current_user.id %>
+            </div>
+            <div class="field">
+              <%= f.hidden_field :opinion_id, value: opinion.id %>
+            </div>
+            <div class="field">
+              <%= f.hidden_field :positive, value: '0' %>
+            </div>
+            <div class="actions">
+              <%= f.submit 'DIS-LICK' %>
+            </div>
+          <% end %>
+          <%= "(#{opinion.reactions.select{|reaction| !reaction.positive}.count})" %>
+        </td>
         <td><%= link_to 'Edit', edit_band_opinion_path(@band, opinion) %></td>
       </tr>
     <% end %>
