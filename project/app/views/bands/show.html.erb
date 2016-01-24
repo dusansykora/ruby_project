@@ -23,3 +23,4 @@
 <%= link_to 'Edit', edit_band_path(@band) %> |
 <%= link_to 'Delete', band_path(@band), method: :delete, data: { confirm: 'Delete this band?' } %> |
 <%= link_to 'Back', bands_path %>
+<%= link_to 'New Event', new_band_event_path(@band,@event) %>
