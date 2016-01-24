@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160123165539) do
+ActiveRecord::Schema.define(version: 20160124145403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20160123165539) do
     t.string   "cover_photo_content_type"
     t.integer  "cover_photo_file_size"
     t.datetime "cover_photo_updated_at"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "start_time"
+    t.integer  "duration"
+    t.string   "place"
+    t.string   "info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "band_id"
   end
 
   create_table "genres", force: :cascade do |t|
