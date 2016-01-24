@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :bands do
     resources :events
+    resources :opinions, only: [:new, :create, :edit, :update, :destroy]
   end
 
   #get '/bands/:band_id/events' => 'events#index'
