@@ -14,5 +14,6 @@ class User < ActiveRecord::Base
 
   belongs_to :band
   has_many :opinions
+  has_many :reactions
   has_many :attendances
 end

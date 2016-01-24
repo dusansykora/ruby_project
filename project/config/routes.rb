@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   root 'application#home', page: 'home'
 
   resources :bands do
-    resources :opinions, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :opinions, only: [:index, :new, :create, :edit, :update, :destroy] do
+      resources :reactions, only: [:create]
+    end
     resources :events do
       resources :attendances, only: [:create, :destroy]
     end
