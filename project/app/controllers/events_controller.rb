@@ -1,9 +1,8 @@
 class EventsController < ApplicationController
   before_action :fetch_current_event, only: [:show, :edit, :update, :destroy]
-  before_action :fetch_current_band, only: [:new, :create]
+  before_action :fetch_current_band, only: [:index, :new, :create, :edit, :show, :update]
 
   def index
-    @events = Event.all
   end
 
   def new
@@ -29,7 +28,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to @event
+      redirect_to band_event_path(@band, @event)
     else
       render 'edit'
     end
@@ -37,7 +36,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to events_path
+    redirect_to band_events_path
   end
 
   private
