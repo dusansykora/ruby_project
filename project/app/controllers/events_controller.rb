@@ -21,6 +21,13 @@ class EventsController < ApplicationController
   end
 
   def show
+    temp = @event.attendances.select { |att| att.user_id == current_user.id }
+    if temp.count > 0
+      @is_going = true
+      @attendance = temp[0]
+    else
+      @is_going = false
+    end
   end
 
   def edit

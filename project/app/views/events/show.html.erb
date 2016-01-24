@@ -26,3 +26,14 @@
 <%= link_to 'Edit', edit_band_event_path(@band, @event) %> |
 <%= link_to 'Delete', band_event_path(@band, @event), method: :delete, data: { confirm: 'Delete this band?' } %> |
 <%= link_to 'Back', band_events_path %>
+
+<strong>Do you want to join?</strong>
+<% if @is_going %>
+  <p>
+    <%= button_to 'No', band_event_attendance_path(@band, @event, @attendance), method: :delete %>
+  </p>
+<% else %>
+  <p>
+    <%= button_to 'Yes', band_event_attendances_path(@band, @event), method: :post, action: 'create' %>
+  </p>
+<% end %>

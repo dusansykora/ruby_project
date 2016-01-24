@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   root 'application#home', page: 'home'
 
   resources :bands do
-    resources :events
     resources :opinions, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :events do
+      resources :attendances, only: [:create, :destroy]
+    end
   end
-
-  #get '/bands/:band_id/events' => 'events#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
