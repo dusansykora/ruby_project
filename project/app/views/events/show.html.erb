@@ -1,1 +1,28 @@
-<h1>Exact event</h1>
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @event.start_time %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @event.duration %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @event.place %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @event.info %>
+</p>
+
+<%= link_to 'Edit', edit_band_event_path(@band, @event) %> |
+<%= link_to 'Delete', band_event_path(@band, @event), method: :delete, data: { confirm: 'Delete this band?' } %> |
+<%= link_to 'Back', band_events_path %>
