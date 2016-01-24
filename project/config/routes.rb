@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :reactions, only: [:create]
     end
     resources :events do
-      resources :attendances, only: [:create, :destroy]
+      resources :attendances, only: [:index, :create, :destroy]
     end
   end
 

@@ -2,7 +2,10 @@ class AttendancesController < ApplicationController
   before_action :fetch_current_event_and_band, only: [:index, :create, :destroy]
 
   def index
-    @attendances = @event.attendances
+    @attendants = []
+    @event.attendances.each do |att|
+      @attendants << User.find(att.user_id).email
+    end
   end
 
   def create

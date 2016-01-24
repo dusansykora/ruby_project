@@ -42,6 +42,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event.attendances.each { |att| att.destroy }
     @event.destroy
     redirect_to band_events_path
   end
