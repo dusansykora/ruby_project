@@ -8,8 +8,10 @@ class Band < ActiveRecord::Base
   has_many :posts
   has_many :albums
   
+  before_validation :strip_whitespace
+  
   validates :name, uniqueness: true, presence: true, length: { minimum: 3, maximum: 20 }, 
-    format: { with: /\A[a-zA-Z0-9]+\z/, message: "only allows letters and numbers" }
+    format: { with: /\A[a-zA-Z0-9 _-]+\z/, message: "only allows letters, numbers, spaces, '-' and '_'" }
   validates :establish_year, presence: true
   validate :establish_year_is_not_in_future
 
@@ -20,5 +22,9 @@ class Band < ActiveRecord::Base
   
   def establish_year_is_not_in_future
     errors.add(:establish_year, "can't be in the future") if !establish_year.blank? && establish_year > Date.today.year
+  end
+  
+  def strip_whitespace
+    self.name = self.name.strip unless self.name.nil?
   end
 end

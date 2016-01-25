@@ -1,3 +1,4 @@
+# Every band has one genre
 class Genre < ActiveRecord::Base
   has_many :bands
   
