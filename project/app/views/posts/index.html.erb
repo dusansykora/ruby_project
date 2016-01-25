@@ -1,0 +1,43 @@
+<style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 10px;
+  }
+  .block {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+</style>
+
+<h1>Posts of Band</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Text</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @band.posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.text %></td>
+        <td><%= link_to "Show comments (pocet komentov)", band_post_path(@band, post, anchor: 'comments') %></td>
+        <td><%= link_to 'Edit', edit_band_post_path(@band, post) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_band_post_path(@band) %> |
+<%= link_to 'Back', @band %>

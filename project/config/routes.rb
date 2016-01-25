@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :events do
       resources :attendances, only: [:index, :create, :destroy]
     end
+    resources :posts
   end
 
   # Example of regular route:

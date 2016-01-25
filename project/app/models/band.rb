@@ -3,6 +3,7 @@ class Band < ActiveRecord::Base
   has_many :users
   has_many :events
   has_many :opinions
+  has_many :posts
   
   has_attached_file :cover_photo,
     :styles => { :medium => "300x300>", :thumb => "100x100#" },

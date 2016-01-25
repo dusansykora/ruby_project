@@ -1,0 +1,30 @@
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @post.text %>
+</p>
+
+<div id="comments">
+  <strong>Comments:</strong>
+  <ul>
+    <li>koment 1</li>
+    <li>koment 2</li>
+    <li>koment 3</li>
+    <li>koment 4</li>
+    <li>koment 5</li>
+    <li>koment 6</li>
+    <li>koment 7</li>
+    <li>koment 8</li>
+    <li>koment 9</li>
+    <li>koment 10</li>
+  </ul>
+  <%= link_to 'Add Comment' %>
+</div>
+
+<%= link_to 'Edit', edit_band_post_path(@band, @post) %> |
+<%= link_to 'Delete', band_post_path(@band, @post), method: :delete, data: { confirm: 'Delete this post?' } %> |
+<%= link_to 'Back', band_posts_path %>
