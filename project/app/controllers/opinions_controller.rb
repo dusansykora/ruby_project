@@ -12,8 +12,11 @@ class OpinionsController < ApplicationController
   def create
     @band = Band.find(params[:band_id])
     @opinion = Opinion.new(opinion_params)
+    @opinion.user_id = current_user.id
+    @opinion.band_id = @band.id
+    
     if @opinion.save
-       redirect_to @opinion.band
+       redirect_to band_opinions_path(@band)
     else
       render 'new'
     end
@@ -27,8 +30,9 @@ class OpinionsController < ApplicationController
   def update
     @band = Band.find(params[:band_id])
     @opinion = Opinion.find(params[:id])
+    
     if @opinion.update(opinion_params)
-      redirect_to @opinion.band
+      redirect_to band_opinions_path(@band)
     else
       render 'edit'
     end
@@ -37,6 +41,7 @@ class OpinionsController < ApplicationController
   def destroy
     @band = Band.find(params[:band_id])
     @opinion = Opinion.find(params[:id])
+    @opinion.reactions.each { |reaction| reaction.destroy }
     @opinion.destroy
     redirect_to @band
   end
@@ -44,6 +49,6 @@ class OpinionsController < ApplicationController
   protected
 
   def opinion_params
-    params.require(:opinion).permit(:user_id, :band_id, :text)
+    params.require(:opinion).permit(:text)
   end
 end

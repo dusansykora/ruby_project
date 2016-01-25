@@ -12,12 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.hidden_field :user_id, value: current_user.id %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :band_id, value: @band.id %>
-  </div>
-  <div class="field">
     <%= f.label :text %><br>
     <%= f.text_area :text %>
   </div>

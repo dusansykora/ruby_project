@@ -2,6 +2,7 @@ class ReactionsController < ApplicationController
   def create
     @band = Band.find(params[:band_id])
     @reaction = Reaction.new(reaction_params)
+    @reaction.user_id = current_user.id
     if params[:reaction][:positive] == '0'
       @reaction.positive = false
     else
@@ -17,6 +18,6 @@ class ReactionsController < ApplicationController
   protected
   
   def reaction_params
-    params.require(:reaction).permit(:user_id, :opinion_id)
+    params.require(:reaction).permit(:opinion_id)
   end
 end
