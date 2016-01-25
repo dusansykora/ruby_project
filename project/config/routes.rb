@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     resources :events do
       resources :attendances, only: [:index, :create, :destroy]
     end
-    resources :posts
+    resources :posts do
+      resources :comments, only: [:new, :create, :edit, :update, :destroy]
+    end
     resources :albums do
       resources :tracks
     end
