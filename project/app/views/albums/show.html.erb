@@ -11,6 +11,27 @@
   <%= image_tag(@album.cover_photo.url(:thumb)) %>
 </p>
 
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @album.tracks.each do |track| %>
+      <tr>
+        <td><%= track.number %></td>
+        <td><%= track.title %></td>
+        <td><%= link_to 'Edit', edit_band_album_track_path(@band, @album, track) %></td>
+        <td><%= link_to 'Delete', band_album_track_path(@band, @album, track), method: :delete, data: { confirm: 'Delete this track?' } %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Add Track', new_band_album_track_path(@band, @album) %>
 <%= link_to 'Edit', edit_band_album_path(@band, @album) %> |
 <%= link_to 'Delete', band_album_path(@band, @album), method: :delete, data: { confirm: 'Delete this band?' } %> |
 <%= link_to 'Back', band_albums_path %> <br>

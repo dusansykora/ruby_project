@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       resources :attendances, only: [:index, :create, :destroy]
     end
     resources :posts
-    resources :albums
+    resources :albums do
+      resources :tracks
+    end
   end
 
   # Example of regular route:
