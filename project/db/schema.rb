@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125162647) do
+ActiveRecord::Schema.define(version: 20160125190101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,14 @@ ActiveRecord::Schema.define(version: 20160125162647) do
 
   add_index "reactions", ["opinion_id"], name: "index_reactions_on_opinion_id", using: :btree
   add_index "reactions", ["user_id"], name: "index_reactions_on_user_id", using: :btree
+
+  create_table "tracks", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "album_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

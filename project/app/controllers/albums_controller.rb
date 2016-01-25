@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   before_action :fetch_current_band, only: [:index, :new, :create, :edit, :show, :update]
   before_action :fetch_current_album, only: [:show, :edit, :update, :destroy]
+
   def index
   end
 
