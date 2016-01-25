@@ -8,13 +8,9 @@ before_filter :configure_account_update_params, only: [:update]
   # end
 
   # POST /resource
-  def create
-    if params[:user][:username] == 'admin'
-      redirect_to("https://www.google.sk/")
-    else
-      super
-    end
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -44,7 +40,6 @@ before_filter :configure_account_update_params, only: [:update]
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    # devise_parameter_sanitizer.for(:sign_up) << :username << :dob
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :username, :dob, :password, :password_confirmation) }
   end
 

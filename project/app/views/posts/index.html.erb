@@ -30,7 +30,7 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.text %></td>
-        <td><%= link_to "Show comments (pocet komentov)", band_post_path(@band, post, anchor: 'comments') %></td>
+        <td><%= link_to "Show comments (#{post.comments.count})", band_post_path(@band, post, anchor: 'comments') %></td>
         <td><%= link_to 'Edit', edit_band_post_path(@band, post) %></td>
       </tr>
     <% end %>

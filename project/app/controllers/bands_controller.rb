@@ -1,21 +1,24 @@
 class BandsController < ApplicationController
   before_action :fetch_current_band, only: [:show, :edit, :update, :destroy]
+  before_action :fetch_genre_names, only: [:new, :edit]
 
   def index
     @bands = Band.all
   end
 
   def new
-    @band = Band.new
-    @genre_names = []
-    Genre.all.each do |genre|
-      @genre_names << genre.name
+    if current_user.band == nil
+      @band = Band.new
+    else
+      flash[:alert] = "You are already in one band, you can't create another one."
+      redirect_to current_user.band
     end
   end
 
   def create
     @band = Band.new(band_params)
     @band.genre = Genre.find_by_name(params[:band][:genre])
+    
     if @band.save
        current_user.update(:band_id => @band.id)
        redirect_to @band
@@ -33,14 +36,15 @@ class BandsController < ApplicationController
   end
 
   def edit
-    @genre_names = []
-    Genre.all.each do |genre|
-      @genre_names << genre.name
+    if @band.id != current_user.band.id
+      flash[:alert] = "You are not member of this band, you can't edit it."
+      redirect_to @band
     end
   end
 
   def update
     @band.genre = Genre.find_by_name(params[:band][:genre])
+    
     if @band.update(band_params)
       redirect_to @band
     else
@@ -49,15 +53,27 @@ class BandsController < ApplicationController
   end
 
   def destroy
-    @band.users.each { |user| user.update(:band_id => nil) }
-    @band.destroy
-    redirect_to bands_path
+    if @band.id != current_user.band.id
+      flash[:alert] = "You are not member of this band, you can't delete it."
+      redirect_to @band
+    else
+      @band.users.each { |user| user.update(:band_id => nil) }
+      @band.destroy
+      redirect_to bands_path
+    end
   end
 
-  private
+  protected
 
   def fetch_current_band
     @band = Band.find(params[:id])
+  end
+  
+  def fetch_genre_names
+    @genre_names = []
+    Genre.all.each do |genre|
+      @genre_names << genre.name
+    end
   end
 
   def band_params

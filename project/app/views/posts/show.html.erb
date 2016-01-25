@@ -11,18 +11,15 @@
 <div id="comments">
   <strong>Comments:</strong>
   <ul>
-    <li>koment 1</li>
-    <li>koment 2</li>
-    <li>koment 3</li>
-    <li>koment 4</li>
-    <li>koment 5</li>
-    <li>koment 6</li>
-    <li>koment 7</li>
-    <li>koment 8</li>
-    <li>koment 9</li>
-    <li>koment 10</li>
+    <% @post.comments.each do |comment| %>
+      <li>
+        <%= comment.user.username %> (<%= comment.represents_band %>): <%= comment.text %> 
+        [ <%= link_to 'Edit', edit_band_post_comment_path(@band, @post, comment) %>  | 
+        <%= link_to 'Delete', band_post_comment_path(@band, @post, comment), method: :delete %> ]
+      </li>
+    <% end %>
   </ul>
-  <%= link_to 'Add Comment' %>
+  <%= link_to 'Add Comment', new_band_post_comment_path(@band, @post) %>
 </div>
 
 <%= link_to 'Edit', edit_band_post_path(@band, @post) %> |
