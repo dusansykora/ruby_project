@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
   has_many :opinions
   has_many :reactions
   has_many :attendances
+  has_many :comments
 end
