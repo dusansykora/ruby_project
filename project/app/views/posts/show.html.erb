@@ -13,7 +13,7 @@
   <ul>
     <% @post.comments.each do |comment| %>
       <li>
-        <%= comment.user.username %> (<%= comment.represents_band %>): <%= comment.text %> 
+        <%= comment.represents_band.nil? ? comment.user.username : Band.find(comment.represents_band).name %>: <%= comment.text %> 
         [ <%= link_to 'Edit', edit_band_post_comment_path(@band, @post, comment) %>  | 
         <%= link_to 'Delete', band_post_comment_path(@band, @post, comment), method: :delete %> ]
       </li>

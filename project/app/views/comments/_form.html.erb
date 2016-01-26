@@ -15,10 +15,12 @@
     <%= f.label :text %><br>
     <%= f.text_area :text %>
   </div>
-  <div class="field" style="<%=  current_user.band == nil ? 'visibility:hidden;' : '' %>">
-    <%= f.label 'Send as band' %><br>
-    <%= f.check_box :represents_band %>
-  </div>
+  <% if !current_user.band_id.nil? %>
+    <div class="field">
+      <%= f.label 'Send as band' %><br>
+      <%= f.check_box :represents_band, checked: !@comment.nil? && !@comment.represents_band.nil? %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
