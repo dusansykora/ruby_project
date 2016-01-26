@@ -52,13 +52,15 @@ class OpinionsController < ApplicationController
   end
   
   def check_user_is_author
+    @opinion = Opinion.find(params[:id])
     if current_user.id != @opinion.user_id
       flash[:alert] = "Access denied, you are not author of this opinion."
-      redirect_to band_opinions_path(@band)
+      redirect_to band_opinions_path(@opinion.band)
     end
   end
   
   def check_user_has_not_written_opinion
+    @band = Band.find(params[:band_id])
     if current_user.opinions.select{ |opinion| opinion.band_id == @band.id }.count > 0
       flash[:alert] = "You have already written opinion on this band, you can't write another one."
       redirect_to band_opinions_path(@band)
