@@ -44,6 +44,9 @@ class BandsController < ApplicationController
 
   def destroy
     @band.users.each { |user| user.update(:band_id => nil) }
+    
+    # destroying of other associated items
+    
     @band.destroy
     redirect_to bands_path
   end
