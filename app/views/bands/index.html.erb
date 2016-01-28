@@ -1,0 +1,43 @@
+<style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 10px;
+  }
+  .block {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+</style>
+
+<h1>Band index</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Establish year</th>
+      <th>Genre</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bands.each do |band| %>
+      <tr>
+        <td><%= band.name %></td>
+        <td><%= band.establish_year %></td>
+        <td><%= band.genre.name %></td>
+        <td><%= link_to 'Show', band %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Band', new_band_path %>
