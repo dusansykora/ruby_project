@@ -1,7 +1,7 @@
 class BandsController < ApplicationController
   before_action :fetch_current_band, only: [:show, :edit, :update, :destroy]
   before_action :fetch_band_for_member, only: [:add_member, :remove_member]
-  before_action :check_user_is_member_of_band, only: [:edit, :update, :destroy]
+  before_action :check_user_is_member_of_band, only: [:edit, :update, :destroy, :add_member, :remove_member]
   before_action :check_user_is_not_in_any_band, only: [:new, :create]
   before_action :fetch_genre_names, only: [:new, :create, :edit, :update]
   before_action :fetch_members_names, only: [:show]
