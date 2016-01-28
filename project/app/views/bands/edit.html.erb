@@ -35,6 +35,35 @@
   </div>
 <% end %>
 
+<h2>Members</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @band.users.each do |member| %>
+      <tr>
+        <td><%= member.username %></td>
+        <td><%= link_to 'X', member_remove_path(@band, member.id), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_tag member_add_path(@band) do %>
+  <div class="field">
+    <%= label_tag :username %><br>
+    <%= text_field_tag :username %>
+  </div>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Show', @band %> |
 <%= link_to 'Back', bands_path %>

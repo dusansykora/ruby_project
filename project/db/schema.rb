@@ -70,6 +70,13 @@ ActiveRecord::Schema.define(version: 20160128162705) do
     t.string   "title"
   end
 
+  create_table "fans", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "band_id"
+  end
+
   create_table "genres", force: :cascade do |t|
     t.string "name"
   end

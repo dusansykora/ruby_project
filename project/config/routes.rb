@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#home', page: 'home'
-  
+
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
@@ -23,6 +23,9 @@ Rails.application.routes.draw do
       resources :tracks
     end
   end
+
+  post '/bands/:band_id/add', to: 'bands#add_member', as: 'member_add'
+  delete '/bands/:band_id/remove/:id', to: 'bands#remove_member', as: 'member_remove'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
