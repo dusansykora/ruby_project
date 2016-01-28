@@ -107,7 +107,6 @@ class BandsController < ApplicationController
   end
 
   def check_user_is_member_of_band
-    @band = Band.find(params[:id])
     if @band.id != current_user.band_id
       flash[:alert] = "Access denied, you are not a member of this band."
       redirect_to @band
