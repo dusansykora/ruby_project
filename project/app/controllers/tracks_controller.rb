@@ -1,6 +1,7 @@
 class TracksController < ApplicationController
   before_action :fetch_current_band_and_album
   before_action :fetch_current_track, only: [:show, :edit, :update, :destroy]
+  before_action :user_is_member_of_band, only: [:new, :create, :edit, :update, :destroy]
 
   def index
   end
@@ -48,6 +49,15 @@ class TracksController < ApplicationController
 
   def fetch_current_track
     @track = Track.find(params[:id])
+  end
+  
+  def user_is_member_of_band
+    @band = Band.find(params[:band_id])
+    @album = Album.find(params[:album_id])
+    if current_user.band_id != @band.id
+      flash[:alert] = "Access denied, you are not member of this band."
+      redirect_to band_album_path(@band, @album)
+    end
   end
 
   def track_params

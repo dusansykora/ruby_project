@@ -5,7 +5,7 @@ class Album < ActiveRecord::Base
   
   before_validation :strip_whitespace
   
-  validates :title, uniqueness: true, presence: true, length: { minimum: 3, maximum: 20 }, 
+  validates :title, presence: true, length: { minimum: 3, maximum: 20 }, 
     format: { with: /\A[a-zA-Z0-9 _-]+\z/, message: "only allows letters, numbers, spaces, '-' and '_'" }
   validates :release_date, presence: true
   validate :release_date_is_not_in_future

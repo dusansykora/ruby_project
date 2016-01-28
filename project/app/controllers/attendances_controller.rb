@@ -11,10 +11,10 @@ class AttendancesController < ApplicationController
   def create
     @attendance = Attendance.new
     @attendance.user_id = current_user.id
-    @attendance.event_id = params[:event_id]
+    @attendance.event_id = @event.id
 
     if !@attendance.save
-      flash[:alert] = 'asdasd'
+      flash[:alert] = 'Error while saving attendance on this event.'
     end
 
     redirect_to band_event_path(@band, @event)
@@ -26,7 +26,7 @@ class AttendancesController < ApplicationController
     redirect_to band_event_path(@band, @event)
   end
 
-  private
+  protected
 
   def fetch_current_event_and_band
     @event = Event.find(params[:event_id])

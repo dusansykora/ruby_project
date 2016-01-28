@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :fetch_current_event, only: [:show, :edit, :update, :destroy]
-  before_action :fetch_current_band, only: [:index, :new, :create, :edit, :show, :update]
+  before_action :fetch_current_band
+  before_action :user_is_member_of_band, only: [:new, :create, :edit, :update, :destroy]
 
   def index
   end
@@ -44,10 +45,10 @@ class EventsController < ApplicationController
   def destroy
     @event.attendances.each { |att| att.destroy }
     @event.destroy
-    redirect_to band_events_path
+    redirect_to band_events_path(@band)
   end
 
-  private
+  protected
 
   def fetch_current_event
     @event = Event.find(params[:id])
@@ -55,6 +56,14 @@ class EventsController < ApplicationController
 
   def fetch_current_band
     @band = Band.find(params[:band_id])
+  end
+  
+  def user_is_member_of_band
+    @band = Band.find(params[:band_id])
+    if current_user.band_id != @band.id
+      flash[:alert] = "Access denied, you are not member of this band."
+      redirect_to band_events_path(@band)
+    end
   end
 
   def event_params
