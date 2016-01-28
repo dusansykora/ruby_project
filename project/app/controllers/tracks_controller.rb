@@ -1,9 +1,8 @@
 class TracksController < ApplicationController
-  before_action :fetch_current_band_and_album, only: [:update, :edit,:show, :new, :index, :create, :destroy]
-  before_action :fetch_current_track, only: [:destroy, :show, :edit, :update]
+  before_action :fetch_current_band_and_album
+  before_action :fetch_current_track, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tracks = @album.tracks
   end
 
   def new
@@ -11,7 +10,6 @@ class TracksController < ApplicationController
   end
 
   def show
-
   end
 
   def create
@@ -41,7 +39,7 @@ class TracksController < ApplicationController
     redirect_to band_album_path(@band, @album)
   end
 
-  private
+  protected
 
   def fetch_current_band_and_album
     @band = Band.find(params[:band_id])
