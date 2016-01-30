@@ -16,7 +16,7 @@ class Album < ActiveRecord::Base
   validates_attachment_content_type :cover_photo, :content_type => /\Aimage\/.*\Z/
   
   def release_date_is_not_in_future
-    errors.add(:release_date, "can't be in the future") if !release_date.blank? && release_date > Date.today.year
+    errors.add(:release_date, "can't be in the future") if !release_date.blank? && release_date > Date.today
   end
   
   def strip_whitespace
