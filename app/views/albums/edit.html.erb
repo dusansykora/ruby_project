@@ -1,33 +1,5 @@
+<%= render "shared/band" %>
+
 <h1>Edit Album</h1>
 
-<%= form_for [@band, @album] do |f| %>
-  <% if @album.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@album.errors.count, "error") %> prohibited this band from being saved:</h2>
-
-      <ul>
-      <% @album.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :release_date %><br>
-    <%= f.date_select :release_date %>
-  </div>
-  <div class="form-group">
-    <%= f.label :cover_photo %>
-    <%= f.file_field :cover_photo %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', band_albums_path %>
+<%= render "form" %>

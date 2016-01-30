@@ -1,42 +1,48 @@
 <%= render "shared/band" %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @event.start_time %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @event.duration %>
-</p>
-
-<p>
-  <strong>Place:</strong>
-  <%= @event.place %>
-</p>
-
-<p>
-  <strong>Info:</strong>
-  <%= @event.info %>
-</p>
-
-<%= link_to 'Edit', edit_band_event_path(@band, @event) %> |
-<%= link_to 'Delete', band_event_path(@band, @event), method: :delete, data: { confirm: 'Delete this band?' } %> |
-<%= link_to 'Back', band_events_path %>
-<%= link_to 'All attendants', band_event_attendances_path(@band, @event) %>
-<br>
-<strong>Do you want to join?</strong>
-<% if @is_going %>
-  <p>
-    <%= button_to 'No', band_event_attendance_path(@band, @event, @attendance), method: :delete %>
-  </p>
-<% else %>
-  <p>
-    <%= button_to 'Yes', band_event_attendances_path(@band, @event), method: :post, action: 'create' %>
-  </p>
-<% end %>
+<div class="col-md-7 col-lg-7">
+  <table class="table">
+    <tr>
+      <th>Title:</th>
+      <td><%= @event.title %></td>
+    </tr>
+    <tr>
+      <th>Start time:</th>
+      <td><%= @event.start_time %></td>
+    </tr>
+    <tr>
+      <th>Duration:</th>
+      <td><%= @event.duration %> min</td>
+    </tr>
+    <tr>
+      <th>Place:</th>
+      <td><%= @event.place %></td>
+    </tr>
+    <tr>
+      <th>Info:</th>
+      <td><%= @event.info %></td>
+    </tr>
+  </table>
+  
+  <% if user_signed_in? && current_user.band_id == @band.id %> 
+    <%= link_to 'Edit', edit_band_event_path(@band, @event), class: "btn btn-primary" %>
+    <%= link_to 'Delete', band_event_path(@band, @event), method: :delete, data: { confirm: 'Delete this event?' }, class: "btn btn-danger" %>
+    <br><br>
+  <% end %>
+    
+  <%= link_to 'Show Participants', band_event_attendances_path(@band, @event), class: "btn btn-default" %>
+    
+  <% if user_signed_in? %>
+    <br><br>
+    <% if @is_going %>
+      <p>
+        <%= button_to 'Cancel attendance', band_event_attendance_path(@band, @event, @attendance), method: :delete, class: "btn btn-danger" %>
+      </p>
+    <% else %>
+      <p>
+        <strong>Do you want to join?</strong>
+        <%= button_to 'Join event', band_event_attendances_path(@band, @event), method: :post, action: 'create', class: "btn btn-primary" %>
+      </p>
+    <% end %>
+  <% end %>
+</div>

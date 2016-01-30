@@ -13,21 +13,20 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :establish_year %><br>
     <%= f.number_field :establish_year, min: 1900, max: Time.now.year %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :genre %><br>
     <%= f.select :genre, @genre_names %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions form-group">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to 'Cancel', bands_path, class: "btn btn-default" %>
   </div>
 <% end %>
-
-<%= link_to 'Back', bands_path %>

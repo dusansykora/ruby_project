@@ -39,7 +39,7 @@
               <%= f.hidden_field :positive, value: '1' %>
             </div>
             <div class="actions">
-              <%= f.submit "LICK (#{opinion.reactions.select{|reaction| reaction.positive}.count})" %>
+              <%= f.submit "LICK (#{opinion.reactions.select{|reaction| reaction.positive}.count})", class: "btn btn-success" %>
             </div>
           <% end %>
         </td>
@@ -52,7 +52,7 @@
               <%= f.hidden_field :positive, value: '0' %>
             </div>
             <div class="actions">
-              <%= f.submit "DIS-LICK (#{opinion.reactions.select{|reaction| !reaction.positive}.count})" %>
+              <%= f.submit "DIS-LICK (#{opinion.reactions.select{|reaction| !reaction.positive}.count})", class: "btn btn-danger" %>
             </div>
           <% end %>
         </td>

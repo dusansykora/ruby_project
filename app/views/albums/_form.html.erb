@@ -1,0 +1,30 @@
+<%= form_for [@band, @album] do |f| %>
+  <% if @album.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
+
+      <ul>
+      <% @album.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :release_date %><br>
+    <%= f.date_select :release_date, end_year: 1900, start_year: Time.now.year %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cover_photo %>
+    <%= f.file_field :cover_photo %>
+  </div>
+  <div class="actions form-group">
+    <%= f.submit class: "btn btn-primary" %>
+    <a role="button" class="btn btn-default" href="<%= band_albums_path(@band) %>">Cancel</a>
+  </div>
+<% end %>

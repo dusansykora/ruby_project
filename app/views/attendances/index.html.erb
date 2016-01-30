@@ -1,23 +1,14 @@
-<h1>These people are subsrcibe to go/no go</h1>
+<h1>Participants</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>E-mail</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
+<p>
+  <string>Number of participants:</string>
+  <%= @participants.count %>
+</p>
 
-  <tbody>
-    Pocet ludi: <%= @attendants.count %> <br>
-    <% @attendants.each do |att| %>
-      <tr>
-        <td><%= att %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul>
+  <% @participants.each do |user| %>
+    <li><%= user.username %></li>
+  <% end %>
+</ul>
 
-<br>
-
-<%= link_to 'Back', band_event_path(@band,@event) %>
+<%= link_to 'Back', band_event_path(@band,@event), class: "btn btn-default" %>

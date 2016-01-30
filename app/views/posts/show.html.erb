@@ -1,29 +1,31 @@
 <%= render "shared/band" %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<h2><%= @post.title %></h2>
 
-<p>
-  <strong>Text:</strong>
-  <%= @post.text %>
-</p>
+<div><%= @post.text %></div>
 
+<br>
 <div id="comments">
-  <strong>Comments:</strong>
+  <h3>Comments:</h3>
   <ul>
     <% @post.comments.each do |comment| %>
       <li>
-        <%= comment.represents_band.nil? ? comment.user.username : Band.find(comment.represents_band).name %>: <%= comment.text %> 
-        [ <%= link_to 'Edit', edit_band_post_comment_path(@band, @post, comment) %>  | 
-        <%= link_to 'Delete', band_post_comment_path(@band, @post, comment), method: :delete %> ]
+        <strong><%= comment.represents_band.nil? ? comment.user.username : Band.find(comment.represents_band).name %>:</strong>
+        <br><%= comment.text %><br>
+        <% if user_signed_in? && (comment.user_id == current_user.id || comment.represents_band == current_user.band_id) %>
+          [ <%= link_to 'Edit', edit_band_post_comment_path(@band, @post, comment) %> | 
+          <%= link_to 'Delete', band_post_comment_path(@band, @post, comment), method: :delete, data: { confirm: 'Delete this comment?' } %> ]
+        <% end %>
       </li>
     <% end %>
   </ul>
-  <%= link_to 'Add Comment', new_band_post_comment_path(@band, @post) %>
+  <% if user_signed_in? %>
+    <%= link_to 'Add Comment', new_band_post_comment_path(@band, @post), class: "btn btn-default" %>
+  <% end %>
 </div>
 
-<%= link_to 'Edit', edit_band_post_path(@band, @post) %> |
-<%= link_to 'Delete', band_post_path(@band, @post), method: :delete, data: { confirm: 'Delete this post?' } %> |
-<%= link_to 'Back', band_posts_path %>
+<% if user_signed_in? && current_user.band_id == @band.id %>
+  <br>
+  <%= link_to 'Edit', edit_band_post_path(@band, @post), class: "btn btn-primary" %>
+  <%= link_to 'Delete', band_post_path(@band, @post), method: :delete, data: { confirm: 'Delete this post?' }, class: "btn btn-danger" %>
+<% end %>
