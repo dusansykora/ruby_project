@@ -57,7 +57,7 @@ class BandsController < ApplicationController
       flash[:alert] = "User #{params[:username]} not found"
     else
       if @member.band != nil
-        flash[:alert] = "User is already member of band #{@member.band.name}."
+        flash[:alert] = "User #{params[:username]} is already member of band #{@member.band.name}."
       else
         flash[:alert] = 'Error during adding user to band.' if !@member.update(:band_id => @band.id)
       end

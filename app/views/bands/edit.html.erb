@@ -36,23 +36,26 @@
 <% end %>
 
 <h2>Members</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @band.users.each do |member| %>
+<div class="row">
+  <div class=" col-lg-4 col-md-4">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= member.username %></td>
-        <td><%= link_to 'X', member_remove_path(@band, member.id), method: :delete %></td>
+        <th>Member username</th>
+        <th colspan="1"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @band.users.each do |member| %>
+        <tr>
+          <td><%= member.username %></td>
+          <td><%= link_to 'X', member_remove_path(@band, member.id), method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+      </div>
+</div>
 
 <%= form_tag member_add_path(@band) do %>
   <div class="field">
@@ -60,7 +63,7 @@
     <%= text_field_tag :username %>
   </div>
   <div class="actions">
-    <%= submit_tag %>
+    <%= submit_tag "Add member" %>
   </div>
 <% end %>
 
