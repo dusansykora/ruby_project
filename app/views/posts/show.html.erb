@@ -23,7 +23,7 @@
             <%= Band.find(comment.represents_band).name %>
           <% end %>
           <small><%= comment.created_at %></small>
-          <% if user_signed_in? && (comment.user_id == current_user.id || comment.represents_band == current_user.band_id) %>
+          <% if user_signed_in? && (comment.user_id == current_user.id || (!current_user.band_id.nil? && comment.represents_band == current_user.band_id)) %>
           [ <%= link_to 'Edit', edit_band_post_comment_path(@band, @post, comment) %> |
             <%= link_to 'Delete', band_post_comment_path(@band, @post, comment), method: :delete, data: { confirm: 'Delete this comment?' } %> ]
           <% end %>

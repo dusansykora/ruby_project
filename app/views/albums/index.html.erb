@@ -13,7 +13,7 @@
     <% end %>
   </div>
   <% if user_signed_in? && current_user.band_id == @band.id %>
-    <a role="button" class="btn btn-default" href="<%= new_band_album_path(@band, @album) %>">New Album</a>
+    <a role="button" class="btn btn-primary" href="<%= new_band_album_path(@band, @album) %>">New Album</a>
   <% end %>
 </div>
 
