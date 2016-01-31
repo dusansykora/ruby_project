@@ -15,29 +15,23 @@
 </style>
 
 <%= render "shared/band" %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Text</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @band.posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.text %></td>
-        <td><%= link_to "Show comments (#{post.comments.count})", band_post_path(@band, post, anchor: 'comments') %></td>
-        <td><%= link_to 'Edit', edit_band_post_path(@band, post) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_band_post_path(@band) %> |
-<%= link_to 'Back', @band %>
+<div class="container">
+  <% @band.posts.each do |post| %>
+    <div class="row">
+      <div class="col-md-8">
+        <h2>
+          <%= post.title %>
+          <small><%= link_to 'Edit', edit_band_post_path(@band, post) %></small>
+        </h2>
+        <p><span class="glyphicon glyphicon-time"></span> Posted on <%= post.created_at %></p>
+        <hr>
+        <p><%= post.text %></p>
+        <%= link_to "Show comments (#{post.comments.count})", band_post_path(@band, post, anchor: 'comments'), class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+  <hr>
+  <% if !current_user.nil? && current_user.band == @band %>
+    <a role="button" class="btn btn-default" href="<%= new_band_post_path %>">New Post</a>
+  <% end %>
+</div>

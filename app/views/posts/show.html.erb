@@ -4,28 +4,36 @@
 
 <div><%= @post.text %></div>
 
-<br>
 <div id="comments">
   <h3>Comments:</h3>
-  <ul>
-    <% @post.comments.each do |comment| %>
-      <li>
-        <strong><%= comment.represents_band.nil? ? comment.user.username : Band.find(comment.represents_band).name %>:</strong>
-        <br><%= comment.text %><br>
-        <% if user_signed_in? && (comment.user_id == current_user.id || comment.represents_band == current_user.band_id) %>
-          [ <%= link_to 'Edit', edit_band_post_comment_path(@band, @post, comment) %> | 
-          <%= link_to 'Delete', band_post_comment_path(@band, @post, comment), method: :delete, data: { confirm: 'Delete this comment?' } %> ]
+  <% @post.comments.each do |comment| %>
+    <div class="media">
+      <div class="pull-left">
+        <% if comment.represents_band.nil? %>
+          <%= image_tag(comment.user.avatar.url(:thumb), class: 'media-object', width: '64', height: '64') %>
+        <% else %>
+          <%= image_tag(Band.find(comment.represents_band).cover_photo.url(:thumb), class: 'media-object', width: '64', height: '64') %>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <% if comment.represents_band.nil? %>
+            <%= comment.user.username %>
+          <% else %>
+            <%= Band.find(comment.represents_band).name %>
+          <% end %>
+          <small><%= comment.created_at %></small>
+          <% if user_signed_in? && (comment.user_id == current_user.id || comment.represents_band == current_user.band_id) %>
+          [ <%= link_to 'Edit', edit_band_post_comment_path(@band, @post, comment) %> |
+            <%= link_to 'Delete', band_post_comment_path(@band, @post, comment), method: :delete, data: { confirm: 'Delete this comment?' } %> ]
+          <% end %>
+        </h4>
+        <%= comment.text %>
+      </div>
+    </div>
+  <% end %>
+  <hr>
   <% if user_signed_in? %>
     <%= link_to 'Add Comment', new_band_post_comment_path(@band, @post), class: "btn btn-default" %>
   <% end %>
 </div>
-
-<% if user_signed_in? && current_user.band_id == @band.id %>
-  <br>
-  <%= link_to 'Edit', edit_band_post_path(@band, @post), class: "btn btn-primary" %>
-  <%= link_to 'Delete', band_post_path(@band, @post), method: :delete, data: { confirm: 'Delete this post?' }, class: "btn btn-danger" %>
-<% end %>

@@ -16,7 +16,7 @@
 
 <%= render "shared/band" %>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Title</th>
@@ -24,25 +24,23 @@
       <th>Duration</th>
       <th>Place</th>
       <th>Info</th>
-      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @band.events.each do |event| %>
       <tr>
-        <td><%= event.title %></td>
+        <td><%= link_to event.title, band_event_path(@band, event) %></td>
         <td><%= event.start_time %></td>
         <td><%= event.duration %></td>
         <td><%= event.place %></td>
         <td><%= event.info %></td>
-        <td><%= link_to 'Show', band_event_path(@band, event) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Event', new_band_event_path %>
-<%= link_to 'Back', @band %>
+<% if !current_user.nil? && current_user.band == @band %>
+  <a role="button" class="btn btn-default" href="<%= new_band_event_path %>">New Event</a>
+<% end %>
