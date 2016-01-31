@@ -4,7 +4,7 @@
 to let people know about their talent.</p>
 <p>It was created in framework Ruby On Rails as homework for subject PV249 - Development in Ruby Language.
   You can also find the whole project on
-  <a href="https://frozen-beyond-31891.herokuapp.com">Heroku</a>.
+  <a href="https://frozen-beyond-31891.herokuapp.com" target="_blank">Heroku</a>.
 </p>
 Contributors:
 <ul>
