@@ -1,3 +1,7 @@
+<% if !current_user.nil? && current_user.band.nil?%>
+  <a role="button" class="btn btn-primary" href="<%= new_band_path %>">Create Your Own Band</a>
+  <br><br>
+<% end %>
 <div class="container">
   <% @bands.each do |band| %>
     <div class="col-sm-4 col-lg-4 col-md-4">
@@ -13,8 +17,5 @@
         </div>
       </div>
     </div>
-  <% end %>
-  <% if !current_user.nil? && current_user.band.nil?%>
-    <a role="button" class="btn btn-primary" href="<%= new_band_path %>">Create Your Own Band</a>
   <% end %>
 </div>
