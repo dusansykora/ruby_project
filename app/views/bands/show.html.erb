@@ -20,14 +20,14 @@
         <td><%= @members %></td>
       </tr>
     </table>
-    
+
     <% if user_signed_in? && current_user.band_id == @band.id %>
       <a role="button" class="btn btn-primary" href="<%= edit_band_path(@band) %>">Edit Band</a>
     <% end %>
   </div>
-    
+
   <div class="col-md-1 col-lg-1"></div>
   <div class="col-lg-5 col-md-5">
-    <%= image_tag(@band.cover_photo.url(:thumb), class: "img-responsive") %>
+    <%= image_tag(@band.cover_photo.url(:medium), class: "img-responsive", width: '250', height: '250') %>
   </div>
 </div>

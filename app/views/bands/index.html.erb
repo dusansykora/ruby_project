@@ -1,43 +1,20 @@
-<style>
-  table, th, td {
-    border: 1px solid black;
-  }
-  table {
-    border-collapse: collapse;
-  }
-  th, td {
-    padding: 10px;
-  }
-  .block {
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-</style>
-
-<h1>Band index</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Establish year</th>
-      <th>Genre</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bands.each do |band| %>
-      <tr>
-        <td><%= band.name %></td>
-        <td><%= band.establish_year %></td>
-        <td><%= band.genre.name %></td>
-        <td><%= link_to 'Show', band %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Band', new_band_path %>
+<div class="container">
+  <% @bands.each do |band| %>
+    <div class="col-sm-4 col-lg-4 col-md-4">
+      <div class="thumbnail">
+        <%= link_to(image_tag(band.cover_photo.url(:medium), :class => "img-thumbnail", width: '250', height: '250'), band_path(band)) %>
+        <div class="caption">
+          <h4 class="pull-right"><%= band.genre.name %></h4>
+          <h4><%= link_to band.name, band %></h4>
+        </div>
+        <div>
+          <p class="pull-right"><%= band.events.count %> events</p>
+          <p><%= band.albums.count %> albums</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if current_user.band.nil?%>
+    <a role="button" class="btn btn-default" href="<%= new_band_path %>">Create Your Own Band</a>
+  <% end %>
+</div>
