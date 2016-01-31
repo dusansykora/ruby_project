@@ -1,7 +1,7 @@
 <%= render "shared/band" %>
 
 <div class="container">
-  <h2>All Albums of <%= @band.name%> </h2>
+  <h2 class="text-center">All Albums of <%= @band.name%> </h2>
   <div class="row">
     <% @band.albums.each do |album| %>
       <div class="col-md-4">
