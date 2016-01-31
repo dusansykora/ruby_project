@@ -17,10 +17,11 @@ class BandsController < ApplicationController
   def create
     @band = Band.new(band_params)
     @band.genre = Genre.find_by_name(params[:band][:genre])
-    @band.users = [current_user]
+    # @band.users = [current_user]
 
     if @band.save
-       redirect_to @band
+      current_user.update(band_id: @band.id)
+      redirect_to @band
     else
       render 'new'
     end
