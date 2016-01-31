@@ -30,6 +30,12 @@ class BandsController < ApplicationController
   end
 
   def edit
+    @available = "["
+    User.all.select{|user| user.band_id.nil?}.each_with_index do |u, i|
+      @available << ", " if i > 0
+      @available << '"' << u.username << '"'
+    end
+    @available << "]"
   end
 
   def update

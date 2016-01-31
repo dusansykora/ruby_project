@@ -61,15 +61,28 @@
   </div>
 </div>
 
-<%= form_tag member_add_path(@band) do %>
-  <div class="field form-group">
-    <%= label_tag :username %><br>
-    <%= text_field_tag :username %>
+<div class="row">
+  <div class="col-md-5 col-lg5">
+    <%= form_tag member_add_path(@band) do %>
+      <div class="field form-group">
+        <%= label_tag :username %><br>
+        <%= select_tag :username, nil, id: "multiselect" %>
+      </div>
+      <div class="actions form-group">
+        <%= submit_tag "Add member", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-  <div class="actions form-group">
-    <%= submit_tag "Add member", class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>
 
 <br>
 <%= link_to 'Back', @band, class: "btn btn-default" %>
+
+<script>
+$("#multiselect").kendoMultiSelect({
+  dataSource: {
+    data: <%= raw @available %>
+  },
+  maxSelectedItems: 1
+});
+</script>
