@@ -11,6 +11,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @tracks = Track.order(:number).select{|track| track.album_id == @album.id}
   end
 
   def create

@@ -1,0 +1,27 @@
+<%= form_for [@band, @album, @track] do |f| %>
+  <% if @track.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@track.errors.count, "error") %> prohibited this track from being saved:</h2>
+
+      <ul>
+      <% @track.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :number %><br>
+    <%= f.number_field :number, min: 1 %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="actions form-group">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to 'Cancel', band_album_path(@band, @album), class: "btn btn-default" %>
+  </div>
+<% end %>
